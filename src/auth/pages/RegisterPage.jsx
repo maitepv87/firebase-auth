@@ -1,20 +1,26 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Button, TextField, Link, Grid, Box, Divider } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { AuthLayout } from "../components";
+import { startCreatingUserWithEmailPassword } from "../../store/auth";
 
 export const RegisterPage = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    console.log({
-      displayName: data.get("displayName"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    dispatch(
+      startCreatingUserWithEmailPassword({
+        displayName: data.get("displayName"),
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+    );
   };
 
   return (

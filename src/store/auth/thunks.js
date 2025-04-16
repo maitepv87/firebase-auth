@@ -6,11 +6,14 @@ export const checkingAuthentication = () => {
   };
 };
 
-export const startLoginWithEmailPassword = () => {
+export const startLoginWithEmailPassword = ({ email, password }) => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
 
-    console.log("start Login With Email Password");
+    console.log("start Login With Email Password", {
+      email: email,
+      password: password,
+    });
   };
 };
 
@@ -18,7 +21,7 @@ export const startGoogleSignIn = () => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
 
-    console.log("start Google Sign In");
+    console.log("Sign in with Google clicked");
   };
 };
 
@@ -27,5 +30,21 @@ export const startLogout = () => {
     console.log("start Logout");
 
     dispatch(logout());
+  };
+};
+
+export const startCreatingUserWithEmailPassword = ({
+  displayName,
+  email,
+  password,
+}) => {
+  return async (dispatch) => {
+    dispatch(checkingCredentials());
+
+    console.log("start Creating User With Email Password", {
+      displayName: displayName,
+      email: email,
+      password: password,
+    });
   };
 };

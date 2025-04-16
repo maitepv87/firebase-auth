@@ -11,7 +11,7 @@ export const ForgotPassword = () => {
     const email = data.get("email");
 
     console.log("Reset link sent to:", email);
-    // Aquí podrías llamar a Firebase: sendPasswordResetEmail(...)
+    //  Firebase: sendPasswordResetEmail(...)
   };
 
   return (

@@ -1,24 +1,32 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Button, TextField, Link, Grid, Box, Divider } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { AuthLayout } from "../components";
+import {
+  startGoogleSignIn,
+  startLoginWithEmailPassword,
+} from "../../store/auth";
 
 export const LoginPage = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    dispatch(
+      startLoginWithEmailPassword({
+        email: data.get("email"),
+        password: data.get("password"),
+      })
+    );
   };
 
   const handleGoogleSignIn = () => {
-    console.log("Sign in with Google clicked");
-    // Aquí podrías despachar tu acción Redux: dispatch(startGoogleSignIn())
+    dispatch(startGoogleSignIn());
   };
 
   return (
