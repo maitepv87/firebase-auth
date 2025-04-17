@@ -1,7 +1,15 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Button, TextField, Link, Grid, Box, Divider } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Button,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Divider,
+  Alert,
+} from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { AuthLayout } from "../components";
@@ -11,6 +19,8 @@ import {
 } from "../../store/auth";
 
 export const LoginPage = () => {
+  const { errorMessage } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -57,6 +67,12 @@ export const LoginPage = () => {
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
           Sign In
         </Button>
+
+        {errorMessage && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            {errorMessage}
+          </Alert>
+        )}
 
         <Divider sx={{ my: 3 }}>or</Divider>
 

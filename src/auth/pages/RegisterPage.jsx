@@ -1,13 +1,26 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Button, TextField, Link, Grid, Box, Divider } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Button,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Divider,
+  Alert,
+} from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { AuthLayout } from "../components";
-import { startCreatingUserWithEmailPassword } from "../../store/auth";
+import {
+  startRegisterUserWithEmailPassword,
+  startGoogleSignIn,
+} from "../../store/auth";
 
 export const RegisterPage = () => {
+  const { errorMessage } = useSelector((state) => state.auth);
+
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -15,12 +28,16 @@ export const RegisterPage = () => {
     const data = new FormData(event.currentTarget);
 
     dispatch(
-      startCreatingUserWithEmailPassword({
+      startRegisterUserWithEmailPassword({
         displayName: data.get("displayName"),
         email: data.get("email"),
         password: data.get("password"),
       })
     );
+  };
+
+  const handleGoogleSignIn = () => {
+    dispatch(startGoogleSignIn());
   };
 
   return (
@@ -61,13 +78,19 @@ export const RegisterPage = () => {
           Create Account
         </Button>
 
+        {errorMessage && (
+          <Alert severity="error" sx={{ mt: 2 }}>
+            {errorMessage}
+          </Alert>
+        )}
+
         <Divider sx={{ my: 3 }}>or</Divider>
 
         <Button
           fullWidth
           variant="outlined"
           startIcon={<GoogleIcon />}
-          onClick={() => console.log("Sign up with Google")}
+          onClick={handleGoogleSignIn}
         >
           Sign up with Google
         </Button>
