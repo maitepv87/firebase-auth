@@ -6,6 +6,8 @@ export const JournalRoutes = () => {
     <Routes>
       <Route path="/" element={<JournalPage />} />
       <Route path=":id" element={<NotePage />} />
+
+      <Route path="/*" element={<Navigate to="/" />} />
     </Routes>
   );
 };
