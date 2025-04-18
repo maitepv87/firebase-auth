@@ -30,6 +30,7 @@ export const ForgotPassword = () => {
           name="email"
           autoComplete="email"
           autoFocus
+          placeholder="••••••"
         />
 
         <Button

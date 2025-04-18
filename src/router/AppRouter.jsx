@@ -21,15 +21,20 @@ export const AppRouter = () => {
 
     //   <Route path="/*" element={<Navigate to="/auth/login" />} />
     // </Routes>
-
     <Routes>
       {status === "authenticated" ? (
-        <Route path="/*" element={<JournalRoutes />} />
+        <>
+          <Route path="/*" element={<JournalRoutes />} />
+          {/* Redirigir auth/* a la página principal cuando está autenticado */}
+          <Route path="/auth/*" element={<Navigate to="/" />} />
+        </>
       ) : (
-        <Route path="/auth/*" element={<AuthRoutes />} />
+        <>
+          <Route path="/auth/*" element={<AuthRoutes />} />
+          {/* Redirigir cualquier otra ruta a login cuando no está autenticado */}
+          <Route path="/*" element={<Navigate to="/auth/login" />} />
+        </>
       )}
-
-      {/* No es necesario redirigir aquí, ya se maneja con el Navigate dentro de JournalRoutes y AuthRoutes */}
     </Routes>
   );
 };

@@ -51,6 +51,7 @@ export const LoginPage = () => {
           name="email"
           autoComplete="email"
           autoFocus
+          placeholder="your@email.com"
         />
 
         <TextField
@@ -62,6 +63,7 @@ export const LoginPage = () => {
           type="password"
           id="password"
           autoComplete="current-password"
+          placeholder="••••••"
         />
 
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>

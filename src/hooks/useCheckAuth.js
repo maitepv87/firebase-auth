@@ -4,6 +4,31 @@ import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuth } from "../firebase/config";
 import { checkingCredentials, login, logout } from "../store/auth";
 
+// export const useCheckAuth = () => {
+//   const { status } = useSelector((state) => state.auth);
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     console.log("Starting authentication check");
+//     dispatch(checkingCredentials());
+
+//     onAuthStateChanged(FirebaseAuth, async (user) => {
+//       if (!user) {
+//         console.log("Disconnecting user");
+//         dispatch(logout());
+//         return;
+//       }
+
+//       const { uid, email, displayName, photoURL } = user;
+
+//       console.log("Authenticated user:", { uid, email, displayName });
+//       dispatch(login({ uid, email, displayName, photoURL }));
+//     });
+//   }, [dispatch]);
+
+//   return status;
+// };
+
 export const useCheckAuth = () => {
   const { status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -11,13 +36,24 @@ export const useCheckAuth = () => {
   useEffect(() => {
     dispatch(checkingCredentials());
 
-    onAuthStateChanged(FirebaseAuth, async (user) => {
-      if (!user) return dispatch(logout());
+    const unsubscribe = onAuthStateChanged(FirebaseAuth, async (user) => {
+      console.log(
+        "Auth state changed:",
+        user ? "authenticated" : "not authenticated"
+      );
 
-      const { displayName, email, photoURL, uid } = user;
-      dispatch(login({ displayName, email, photoURL, uid }));
+      if (!user) {
+        dispatch(logout());
+        return;
+      }
+
+      const { uid, email, displayName, photoURL } = user;
+      dispatch(login({ uid, email, displayName, photoURL }));
     });
+
+    // Importante: Devolver función de limpieza para evitar múltiples suscripciones
+    return () => unsubscribe();
   }, [dispatch]);
 
-  return status;
+  return { status };
 };

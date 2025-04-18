@@ -50,6 +50,7 @@ export const RegisterPage = () => {
           id="displayName"
           label="Full Name"
           name="displayName"
+          placeholder="Jon Snow"
           autoFocus
         />
 
@@ -61,6 +62,7 @@ export const RegisterPage = () => {
           label="Email Address"
           name="email"
           autoComplete="email"
+          placeholder="your@email.com"
         />
 
         <TextField
@@ -72,6 +74,7 @@ export const RegisterPage = () => {
           type="password"
           id="password"
           autoComplete="new-password"
+          placeholder="••••••"
         />
 
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
