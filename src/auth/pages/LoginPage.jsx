@@ -20,7 +20,6 @@ import {
 
 export const LoginPage = () => {
   const { errorMessage } = useSelector((state) => state.auth);
-
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {

@@ -4,31 +4,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuth } from "../firebase/config";
 import { checkingCredentials, login, logout } from "../store/auth";
 
-// export const useCheckAuth = () => {
-//   const { status } = useSelector((state) => state.auth);
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     console.log("Starting authentication check");
-//     dispatch(checkingCredentials());
-
-//     onAuthStateChanged(FirebaseAuth, async (user) => {
-//       if (!user) {
-//         console.log("Disconnecting user");
-//         dispatch(logout());
-//         return;
-//       }
-
-//       const { uid, email, displayName, photoURL } = user;
-
-//       console.log("Authenticated user:", { uid, email, displayName });
-//       dispatch(login({ uid, email, displayName, photoURL }));
-//     });
-//   }, [dispatch]);
-
-//   return status;
-// };
-
 export const useCheckAuth = () => {
   const { status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -51,7 +26,7 @@ export const useCheckAuth = () => {
       dispatch(login({ uid, email, displayName, photoURL }));
     });
 
-    // Importante: Devolver función de limpieza para evitar múltiples suscripciones
+    // Return cleanup function to avoid multiple subscriptions
     return () => unsubscribe();
   }, [dispatch]);
 
