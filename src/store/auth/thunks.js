@@ -74,7 +74,7 @@ export const startLogout = () => {
 
 export const startSendPasswordReset = ({ email }) => {
   return async (dispatch) => {
-    dispatch(checkingCredentials());
+    // dispatch(checkingCredentials());
 
     const result = await sendPasswordReset({ email });
 
