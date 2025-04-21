@@ -1,12 +1,19 @@
-# React + Vite
+# redux-firebase-auth
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**redux-firebase-auth** is an authentication project built with React, Redux Toolkit, and Firebase. This project was created to practice user authentication integration through email and password, as well as Google authentication, in a React app using Redux to manage global state.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Google Authentication**: Allows users to sign up or log in using their Google account.
+- **User Registration**: Users can register with their email and password.
+- **Password Reset**: Users can request a password reset link if they forget their password.
+- **Error Handling**: The project handles errors that may occur during the authentication process, such as an already registered email or incorrect password.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React**: Library to build the user interface.
+- **Redux Toolkit**: For managing global state efficiently in the app.
+- **Firebase**: Used for user authentication via email, password, and Google.
+- **Material UI**: UI component library to help build attractive and functional interfaces.
+
+
