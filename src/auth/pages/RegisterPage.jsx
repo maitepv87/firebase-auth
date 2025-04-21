@@ -1,6 +1,6 @@
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
 import {
   Button,
   TextField,
@@ -20,20 +20,75 @@ import {
 
 export const RegisterPage = () => {
   const { errorMessage } = useSelector((state) => state.auth);
-
   const dispatch = useDispatch();
+
+  const [formValues, setFormValues] = useState({
+    displayName: "",
+    email: "",
+    password: "",
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const validateForm = ({ displayName, email, password }) => {
+    const errors = {};
+
+    if (!displayName.trim()) {
+      errors.displayName = "Name is required.";
+    }
+
+    if (!email.trim()) {
+      errors.email = "Email is required.";
+    } else if (!emailRegex.test(email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    if (!password.trim()) {
+      errors.password = "Password is required.";
+    } else if (password.length < 6) {
+      errors.password = "Password must be at least 6 characters long.";
+    }
+
+    return errors;
+  };
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+
+    setFormValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    // Limpiar errores si el nuevo valor es válido
+    setFormErrors((prev) => {
+      const newErrors = { ...prev };
+      if (name === "displayName" && value.trim()) {
+        delete newErrors.displayName;
+      }
+      if (name === "email") {
+        if (value.trim() && emailRegex.test(value)) {
+          delete newErrors.email;
+        }
+      }
+      if (name === "password" && value.length >= 6) {
+        delete newErrors.password;
+      }
+      return newErrors;
+    });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
-    dispatch(
-      startRegisterUserWithEmailPassword({
-        displayName: data.get("displayName"),
-        email: data.get("email"),
-        password: data.get("password"),
-      })
-    );
+    const errors = validateForm(formValues);
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(startRegisterUserWithEmailPassword(formValues));
+    }
   };
 
   const handleGoogleSignIn = () => {
@@ -50,7 +105,11 @@ export const RegisterPage = () => {
           id="displayName"
           label="Full Name"
           name="displayName"
+          value={formValues.displayName}
+          onChange={handleChange}
           placeholder="Jon Snow"
+          error={!!formErrors.displayName}
+          helperText={formErrors.displayName}
           autoFocus
         />
 
@@ -61,8 +120,12 @@ export const RegisterPage = () => {
           id="email"
           label="Email Address"
           name="email"
+          value={formValues.email}
+          onChange={handleChange}
           autoComplete="email"
           placeholder="your@email.com"
+          error={!!formErrors.email}
+          helperText={formErrors.email}
         />
 
         <TextField
@@ -73,8 +136,12 @@ export const RegisterPage = () => {
           label="Password"
           type="password"
           id="password"
+          value={formValues.password}
+          onChange={handleChange}
           autoComplete="new-password"
           placeholder="••••••"
+          error={!!formErrors.password}
+          helperText={formErrors.password}
         />
 
         <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
@@ -82,7 +149,7 @@ export const RegisterPage = () => {
         </Button>
 
         {errorMessage && (
-          <Alert severity="error" sx={{ mt: 2 }}>
+          <Alert severity="error" sx={{ mt: 2 }} aria-live="assertive">
             {errorMessage}
           </Alert>
         )}

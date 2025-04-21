@@ -3,6 +3,7 @@ import {
   loginWithGoogle,
   logoutFirebase,
   registerUserWithEmailPassword,
+  sendPasswordReset,
 } from "../../firebase/providers";
 import { checkingCredentials, login, logout } from "./";
 
@@ -68,5 +69,17 @@ export const startLogout = () => {
     } else {
       dispatch(logout());
     }
+  };
+};
+
+export const startSendPasswordReset = ({ email }) => {
+  return async (dispatch) => {
+    const result = await sendPasswordReset({ email });
+
+    console.log("sendPasswordReset", result);
+
+    if (!result.ok) dispatch(logout({ errorMessage: result.errorMessage }));
+
+    return result;
   };
 };

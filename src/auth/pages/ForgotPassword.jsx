@@ -1,17 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, TextField, Link, Box, Typography } from "@mui/material";
+import { Button, TextField, Link, Box, Typography, Alert } from "@mui/material";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import { AuthLayout } from "../components";
+import { startSendPasswordReset } from "../../store/auth";
+import { useDispatch, useSelector } from "react-redux";
 
 export const ForgotPassword = () => {
+  const { errorMessage } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email");
 
-    console.log("Reset link sent to:", email);
-    //  Firebase: sendPasswordResetEmail(...)
+    // Validación simple
+    if (!email) {
+      setError("Email is required.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setError("");
+    setSuccessMessage("");
+
+    const result = dispatch(startSendPasswordReset({ email }));
+
+    if (result?.ok) {
+      setSuccessMessage("A reset link was sent to your email.");
+    }
   };
 
   return (
@@ -19,6 +44,18 @@ export const ForgotPassword = () => {
       <Typography variant="body2" sx={{ mt: 1, mb: 2, textAlign: "center" }}>
         Enter your email and we'll send you a link to reset your password.
       </Typography>
+
+      {successMessage && (
+        <Alert severity="success" sx={{ mb: 2 }}>
+          {successMessage}
+        </Alert>
+      )}
+
+      {errorMessage && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {errorMessage}
+        </Alert>
+      )}
 
       <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
         <TextField
@@ -30,7 +67,14 @@ export const ForgotPassword = () => {
           name="email"
           autoComplete="email"
           autoFocus
-          placeholder="••••••"
+          placeholder="your@email.com"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (error) setError(""); // Limpia el error si empieza a escribir
+          }}
+          error={!!error}
+          helperText={error}
         />
 
         <Button
