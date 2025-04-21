@@ -52,7 +52,12 @@ export const ForgotPassword = () => {
       )}
 
       {errorMessage && (
-        <Alert severity="error" sx={{ mb: 2 }}>
+        <Alert
+          severity="error"
+          sx={{ mt: 2 }}
+          role="alert"
+          aria-live="assertive"
+        >
           {errorMessage}
         </Alert>
       )}

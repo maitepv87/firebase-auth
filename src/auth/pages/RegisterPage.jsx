@@ -139,7 +139,7 @@ export const RegisterPage = () => {
           value={formValues.password}
           onChange={handleChange}
           autoComplete="new-password"
-          placeholder="••••••"
+          placeholder="********"
           error={!!formErrors.password}
           helperText={formErrors.password}
         />
@@ -149,7 +149,12 @@ export const RegisterPage = () => {
         </Button>
 
         {errorMessage && (
-          <Alert severity="error" sx={{ mt: 2 }} aria-live="assertive">
+          <Alert
+            severity="error"
+            sx={{ mt: 2 }}
+            role="alert"
+            aria-live="assertive"
+          >
             {errorMessage}
           </Alert>
         )}

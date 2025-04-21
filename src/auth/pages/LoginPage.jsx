@@ -9,6 +9,7 @@ import {
   Box,
   Divider,
   Alert,
+  CircularProgress,
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -19,7 +20,7 @@ import {
 } from "../../store/auth";
 
 export const LoginPage = () => {
-  const { errorMessage } = useSelector((state) => state.auth);
+  const { errorMessage, status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [formValues, setFormValues] = useState({
@@ -27,6 +28,8 @@ export const LoginPage = () => {
     password: "",
   });
   const [formErrors, setFormErrors] = useState({});
+
+  const isAuthenticating = status === "checking";
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -110,19 +113,34 @@ export const LoginPage = () => {
           type="password"
           id="password"
           autoComplete="current-password"
-          placeholder="••••••"
+          placeholder="********"
           value={formValues.password}
           onChange={handleChange}
           error={!!formErrors.password}
           helperText={formErrors.password}
         />
 
-        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
-          Sign In
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3 }}
+          disabled={isAuthenticating}
+        >
+          {isAuthenticating ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Sign In"
+          )}
         </Button>
 
         {errorMessage && (
-          <Alert severity="error" sx={{ mt: 2 }} aria-live="assertive">
+          <Alert
+            severity="error"
+            sx={{ mt: 2 }}
+            role="alert"
+            aria-live="assertive"
+          >
             {errorMessage}
           </Alert>
         )}
@@ -134,6 +152,7 @@ export const LoginPage = () => {
           variant="outlined"
           startIcon={<GoogleIcon />}
           onClick={handleGoogleSignIn}
+          disabled={isAuthenticating}
         >
           Sign in with Google
         </Button>
