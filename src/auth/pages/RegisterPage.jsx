@@ -9,6 +9,7 @@ import {
   Box,
   Divider,
   Alert,
+  CircularProgress,
 } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -19,7 +20,7 @@ import {
 } from "../../store/auth";
 
 export const RegisterPage = () => {
-  const { errorMessage } = useSelector((state) => state.auth);
+  const { errorMessage, status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [formValues, setFormValues] = useState({
@@ -27,8 +28,9 @@ export const RegisterPage = () => {
     email: "",
     password: "",
   });
-
   const [formErrors, setFormErrors] = useState({});
+
+  const isAuthenticating = status === "checking";
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -144,8 +146,18 @@ export const RegisterPage = () => {
           helperText={formErrors.password}
         />
 
-        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
-          Create Account
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3 }}
+          disabled={isAuthenticating}
+        >
+          {isAuthenticating ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Create Account"
+          )}
         </Button>
 
         {errorMessage && (
@@ -166,6 +178,7 @@ export const RegisterPage = () => {
           variant="outlined"
           startIcon={<GoogleIcon />}
           onClick={handleGoogleSignIn}
+          disabled={isAuthenticating}
         >
           Sign up with Google
         </Button>

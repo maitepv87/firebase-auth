@@ -1,20 +1,30 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, TextField, Link, Box, Typography, Alert } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Link,
+  Box,
+  Typography,
+  Alert,
+  CircularProgress,
+} from "@mui/material";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import { AuthLayout } from "../components";
 import { startSendPasswordReset } from "../../store/auth";
-import { useDispatch, useSelector } from "react-redux";
 
 export const ForgotPassword = () => {
-  const { errorMessage } = useSelector((state) => state.auth);
+  const { errorMessage, status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSubmit = (event) => {
+  const isSending = status === "checking";
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Validación simple
@@ -24,6 +34,7 @@ export const ForgotPassword = () => {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address.");
       return;
@@ -32,10 +43,12 @@ export const ForgotPassword = () => {
     setError("");
     setSuccessMessage("");
 
-    const result = dispatch(startSendPasswordReset({ email }));
+    const result = await dispatch(startSendPasswordReset({ email }));
 
-    if (result?.ok) {
+    if (result.ok) {
       setSuccessMessage("A reset link was sent to your email.");
+    } else {
+      setError(result.errorMessage || "Failed to send reset link.");
     }
   };
 
@@ -76,7 +89,8 @@ export const ForgotPassword = () => {
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            if (error) setError(""); // Limpia el error si empieza a escribir
+            if (error) setError("");
+            if (successMessage) setSuccessMessage("");
           }}
           error={!!error}
           helperText={error}
@@ -87,8 +101,13 @@ export const ForgotPassword = () => {
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
+          disabled={isSending}
         >
-          Send Reset Link
+          {isSending ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Send Reset Link"
+          )}
         </Button>
 
         <Link component={RouterLink} to="/auth/login" variant="body2">
