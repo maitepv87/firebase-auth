@@ -5,9 +5,9 @@ import { AppLoader } from "../components/ui/AppLoader";
 import { useCheckAuth } from "../hooks";
 
 export const AppRouter = () => {
-  const { status } = useCheckAuth();
+  const { status, initialCheckDone } = useCheckAuth();
 
-  if (status === "checking") {
+  if (!initialCheckDone) {
     return <AppLoader />;
   }
 
