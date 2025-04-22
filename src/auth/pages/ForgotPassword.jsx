@@ -48,6 +48,7 @@ export const ForgotPassword = () => {
     if (result.ok) {
       setSuccessMessage("A reset link was sent to your email.");
     } else {
+      
       setError(result.errorMessage || "Failed to send reset link.");
     }
   };
