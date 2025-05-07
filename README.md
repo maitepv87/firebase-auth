@@ -1,19 +1,36 @@
-# redux-firebase-auth
+# Redux Firebase Auth  
 
-**redux-firebase-auth** is an authentication project built with React, Redux Toolkit, and Firebase. This project was created to practice user authentication integration through email and password, as well as Google authentication, in a React app using Redux to manage global state.
+React-based authentication system using Firebase and Redux.  
 
-## Features
+## About  
 
-- **Google Authentication**: Allows users to sign up or log in using their Google account.
-- **User Registration**: Users can register with their email and password.
-- **Password Reset**: Users can request a password reset link if they forget their password.
-- **Error Handling**: The project handles errors that may occur during the authentication process, such as an already registered email or incorrect password.
+Redux Firebase Auth is a frontend project built with React, Redux, and Firebase to implement user authentication seamlessly. It provides a structured approach to managing authentication flows, including login, logout, and data persistence, while maintaining a clean and scalable architecture.  
 
-## Tech Stack
+Additionally, it includes a Journal module for users to store personal notes, demonstrating practical data management with Firebase Firestore.  
 
-- **React**: Library to build the user interface.
-- **Redux Toolkit**: For managing global state efficiently in the app.
-- **Firebase**: Used for user authentication via email, password, and Google.
-- **Material UI**: UI component library to help build attractive and functional interfaces.
+## Features  
 
+### Authentication  
+- Firebase Authentication with email/password login  
+- Redux for global state management of user sessions  
+- Secure login and logout process  
 
+### UI and Accessibility  
+- Responsive design with Material UI  
+- ARIA attributes for enhanced accessibility  
+- Clear error handling and user feedback  
+
+## Tech Stack  
+
+- React – Component-based UI development  
+- Redux – Efficient state management  
+- Firebase – Authentication and Firestore database  
+- Material UI – Prebuilt UI components with styling  
+- JavaScript (ES6+) – Modern coding standards  
+- Vite – Fast development and bundling  
+
+## Installation and Usage  
+
+### Clone the repository  
+```bash
+git clone https://github.com/maitepv87/redux-firebase-auth.git
