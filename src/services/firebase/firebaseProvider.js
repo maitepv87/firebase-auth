@@ -6,7 +6,7 @@ import {
   updateProfile,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { FirebaseAuth } from "./config";
+import { FirebaseAuth } from "./firebaseConfig";
 
 const googleProvider = new GoogleAuthProvider();
 

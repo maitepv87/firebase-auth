@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Paper, Typography, Box } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { startLogout } from "../../store/auth";
+import { startLogout } from "../../../store/auth";
 
 export const JournalPage = () => {
   const { displayName } = useSelector((state) => state.auth);

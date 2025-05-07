@@ -17,7 +17,7 @@ import { AuthLayout } from "../components";
 import {
   startGoogleSignIn,
   startLoginWithEmailPassword,
-} from "../../store/auth";
+} from "../../../store/auth";
 
 export const LoginPage = () => {
   const { errorMessage, status } = useSelector((state) => state.auth);

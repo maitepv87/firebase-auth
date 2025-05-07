@@ -4,7 +4,7 @@ import {
   logoutFirebase,
   registerUserWithEmailPassword,
   sendPasswordReset,
-} from "../../firebase/providers";
+} from "../../services/firebase/firebaseProvider";
 import { checkingCredentials, login, logout } from "./";
 
 export const checkingAuthentication = () => {
