@@ -1,36 +1,33 @@
-# Redux Firebase Auth  
+# RTK-Firebase-Auth  
 
-React-based authentication system using Firebase and Redux.  
+## Description  
+RTK-Firebase-Auth is a testing lab built with **React**, **Redux Toolkit**, and **Firebase**, designed to explore efficient authentication and state management patterns. This project allows hands-on experimentation with:
 
-## About  
+- **User authentication** via Firebase (email/password login)  
+- **State management** for session persistence using Redux Toolkit  
+- **Firestore integration** for storing and retrieving user data  
+- **Material UI components** for a responsive interface  
+- **Accessibility improvements**, including ARIA attributes  
 
-Redux Firebase Auth is a frontend project built with React, Redux, and Firebase to implement user authentication seamlessly. It provides a structured approach to managing authentication flows, including login, logout, and data persistence, while maintaining a clean and scalable architecture.  
+It serves as a structured sandbox for understanding **authentication flows with Redux Toolkit and Firebase**, maintaining scalability and clean architecture principles.
 
-Additionally, it includes a Journal module for users to store personal notes, demonstrating practical data management with Firebase Firestore.  
+## Technologies Used  
+- **React** – Frontend library for building UI components  
+- **Redux Toolkit** – Optimized state management with slices  
+- **Firebase Authentication** – Secure user login/logout  
+- **Firestore Database** – Cloud storage for journal data  
+- **Material UI** – Prebuilt UI components with styling  
+- **Vite** – Fast build tool for modern development  
 
-## Features  
+## Getting Started  
 
-### Authentication  
-- Firebase Authentication with email/password login  
-- Redux for global state management of user sessions  
-- Secure login and logout process  
+### Installation & Setup  
+To run the project locally, follow these steps:
 
-### UI and Accessibility  
-- Responsive design with Material UI  
-- ARIA attributes for enhanced accessibility  
-- Clear error handling and user feedback  
-
-## Tech Stack  
-
-- React – Component-based UI development  
-- Redux – Efficient state management  
-- Firebase – Authentication and Firestore database  
-- Material UI – Prebuilt UI components with styling  
-- JavaScript (ES6+) – Modern coding standards  
-- Vite – Fast development and bundling  
-
-## Installation and Usage  
-
-### Clone the repository  
+#### Clone the repository  
 ```bash
-git clone https://github.com/maitepv87/redux-firebase-auth.git
+git clone https://github.com/maitepv87/rtk-firebase-auth.git
+cd rtk-firebase-auth
+npm install
+npm run dev
+
