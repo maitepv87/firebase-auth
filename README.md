@@ -30,8 +30,8 @@ To run the project locally, follow these steps:
 #### Clone the repository
 
 ```bash
-git clone https://github.com/maitepv87/rtk-firebase-auth.git
-cd rtk-firebase-auth
+git clone https://github.com/maitepv87/firebase-auth.git
+cd firebase-auth
 ```
 
 #### Install dependencies
