@@ -80,7 +80,7 @@ export const loginWithEmailPassword = async ({ email, password }) => {
 
 export const logoutFirebase = async () => {
   try {
-    await signOut(FirebaseAuth);
+    await FirebaseAuth.signOut();
 
     return {
       ok: true,

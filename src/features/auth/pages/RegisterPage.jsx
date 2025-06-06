@@ -1,19 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import {
-  Button,
-  TextField,
-  Link,
-  Grid,
-  Box,
-  Divider,
-  Alert,
-  CircularProgress,
-} from "@mui/material";
+import { TextField, Link, Grid, Box, Divider } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { AuthLayout } from "../components";
+import { AuthLayout, FeedbackMessage, AuthButton } from "../components";
 import {
   startRegisterWithEmailPassword,
   startGoogleSignIn,
@@ -146,42 +137,23 @@ export const RegisterPage = () => {
           helperText={formErrors.password}
         />
 
-        <Button
+        <AuthButton
+          text="Create Account"
           type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3 }}
           disabled={isAuthenticating}
-        >
-          {isAuthenticating ? (
-            <CircularProgress size={24} color="inherit" />
-          ) : (
-            "Create Account"
-          )}
-        </Button>
+        />
 
-        {errorMessage && (
-          <Alert
-            severity="error"
-            sx={{ mt: 2 }}
-            role="alert"
-            aria-live="assertive"
-          >
-            {errorMessage}
-          </Alert>
-        )}
+        <FeedbackMessage message={errorMessage} type="error" />
 
         <Divider sx={{ my: 3 }}>or</Divider>
 
-        <Button
-          fullWidth
-          variant="outlined"
-          startIcon={<GoogleIcon />}
+        <AuthButton
+          text="Sign up with Google"
           onClick={handleGoogleSignIn}
+          variant="outlined"
+          icon={<GoogleIcon />}
           disabled={isAuthenticating}
-        >
-          Sign up with Google
-        </Button>
+        />
 
         <Grid container justifyContent="flex-end" sx={{ mt: 2 }}>
           <Grid item>

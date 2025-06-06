@@ -1,17 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import {
-  Button,
-  TextField,
-  Link,
-  Box,
-  Typography,
-  Alert,
-  CircularProgress,
-} from "@mui/material";
+import { TextField, Link, Box, Typography } from "@mui/material";
 import LockResetIcon from "@mui/icons-material/LockReset";
-import { AuthLayout } from "../components";
+import { AuthLayout, FeedbackMessage, AuthButton } from "../components";
 import { startPasswordReset } from "../store/thunks";
 
 export const ForgotPassword = () => {
@@ -58,22 +50,8 @@ export const ForgotPassword = () => {
         Enter your email and we'll send you a link to reset your password.
       </Typography>
 
-      {successMessage && (
-        <Alert severity="success" sx={{ mb: 2 }}>
-          {successMessage}
-        </Alert>
-      )}
-
-      {errorMessage && (
-        <Alert
-          severity="error"
-          sx={{ mt: 2 }}
-          role="alert"
-          aria-live="assertive"
-        >
-          {errorMessage}
-        </Alert>
-      )}
+      <FeedbackMessage message={successMessage} type="success" />
+      <FeedbackMessage message={errorMessage} type="error" />
 
       <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
         <TextField
@@ -96,19 +74,7 @@ export const ForgotPassword = () => {
           helperText={error}
         />
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          disabled={isSending}
-        >
-          {isSending ? (
-            <CircularProgress size={24} color="inherit" />
-          ) : (
-            "Send Reset Link"
-          )}
-        </Button>
+        <AuthButton text="Send Reset Link" type="submit" disabled={isSending} />
 
         <Link component={RouterLink} to="/auth/login" variant="body2">
           Back to Login

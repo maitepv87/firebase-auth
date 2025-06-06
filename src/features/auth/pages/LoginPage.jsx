@@ -1,19 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Button,
-  TextField,
-  Link,
-  Grid,
-  Box,
-  Divider,
-  Alert,
-  CircularProgress,
-} from "@mui/material";
+import { TextField, Link, Grid, Box, Divider } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { AuthLayout } from "../components";
+import { AuthLayout, FeedbackMessage, AuthButton } from "../components";
 import {
   startGoogleSignIn,
   startLoginWithEmailPassword,
@@ -120,42 +111,24 @@ export const LoginPage = () => {
           helperText={formErrors.password}
         />
 
-        <Button
+        <AuthButton
+          text="Sign In"
           type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3 }}
           disabled={isAuthenticating}
-        >
-          {isAuthenticating ? (
-            <CircularProgress size={24} color="inherit" />
-          ) : (
-            "Sign In"
-          )}
-        </Button>
+          loading={isAuthenticating}
+        />
 
-        {errorMessage && (
-          <Alert
-            severity="error"
-            sx={{ mt: 2 }}
-            role="alert"
-            aria-live="assertive"
-          >
-            {errorMessage}
-          </Alert>
-        )}
+        <FeedbackMessage message={errorMessage} type="error" />
 
-        <Divider sx={{ my: 3 }}>or</Divider>
+        <Divider sx={{ my: 2 }}>or</Divider>
 
-        <Button
-          fullWidth
-          variant="outlined"
-          startIcon={<GoogleIcon />}
+        <AuthButton
+          text="Sign in with Google"
           onClick={handleGoogleSignIn}
+          variant="outlined"
+          icon={<GoogleIcon />}
           disabled={isAuthenticating}
-        >
-          Sign in with Google
-        </Button>
+        />
 
         <Grid
           container
