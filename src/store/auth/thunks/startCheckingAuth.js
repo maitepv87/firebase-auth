@@ -1,6 +1,6 @@
 import { setCheckingCredentials } from "../authSlice";
 
-export const checkAuthStatus = () => {
+export const startCheckingAuth = () => {
   return async (dispatch) => {
     dispatch(setCheckingCredentials());
   };

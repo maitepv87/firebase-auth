@@ -16,7 +16,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { AuthLayout } from "../components";
 import {
   startGoogleSignIn,
-  startEmailPasswordSignIn,
+  startLoginWithEmailPassword,
 } from "../../../store/auth/thunks";
 
 export const LoginPage = () => {
@@ -77,7 +77,7 @@ export const LoginPage = () => {
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      dispatch(startEmailPasswordSignIn(formValues));
+      dispatch(startLoginWithEmailPassword(formValues));
     }
   };
 

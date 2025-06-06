@@ -1,7 +1,7 @@
 import { sendPasswordReset } from "../../../services/firebase/firebaseProvider";
 import { setLogout } from "../authSlice";
 
-export const startResetPassword = ({ email }) => {
+export const startPasswordReset = ({ email }) => {
   return async (dispatch) => {
     const result = await sendPasswordReset({ email });
 

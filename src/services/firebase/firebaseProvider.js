@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { FirebaseAuth } from "./firebaseConfig";
+import { buildError } from "../../utils";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -24,14 +25,7 @@ export const loginWithGoogle = async () => {
       uid,
     };
   } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    return {
-      ok: false,
-      errorCode,
-      errorMessage,
-    };
+    return buildError(error);
   }
 };
 
@@ -59,14 +53,7 @@ export const registerUserWithEmailPassword = async ({
       displayName,
     };
   } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    return {
-      ok: false,
-      errorCode,
-      errorMessage,
-    };
+    return buildError(error);
   }
 };
 
@@ -87,33 +74,19 @@ export const loginWithEmailPassword = async ({ email, password }) => {
       uid,
     };
   } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    return {
-      ok: false,
-      errorCode,
-      errorMessage,
-    };
+    return buildError(error);
   }
 };
 
 export const logoutFirebase = async () => {
   try {
-    await FirebaseAuth.signOut();
+    await signOut(FirebaseAuth);
 
     return {
       ok: true,
     };
   } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    return {
-      ok: false,
-      errorCode,
-      errorMessage,
-    };
+    return buildError(error);
   }
 };
 
@@ -125,13 +98,6 @@ export const sendPasswordReset = async ({ email }) => {
       ok: true,
     };
   } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    return {
-      ok: false,
-      errorCode,
-      errorMessage,
-    };
+    return buildError(error);
   }
 };

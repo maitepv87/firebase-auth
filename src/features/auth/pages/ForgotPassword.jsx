@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import { AuthLayout } from "../components";
-import { startResetPassword } from "../../../store/auth/thunks";
+import { startPasswordReset } from "../../../store/auth/thunks";
 
 export const ForgotPassword = () => {
   const { errorMessage, status } = useSelector((state) => state.auth);
@@ -43,7 +43,7 @@ export const ForgotPassword = () => {
     setError("");
     setSuccessMessage("");
 
-    const result = await dispatch(startResetPassword({ email }));
+    const result = await dispatch(startPasswordReset({ email }));
 
     if (result.ok) {
       setSuccessMessage("A reset link was sent to your email.");

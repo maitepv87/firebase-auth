@@ -15,7 +15,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { AuthLayout } from "../components";
 import {
-  startRegisterUserWithEmailPassword,
+  startRegisterWithEmailPassword,
   startGoogleSignIn,
 } from "../../../store/auth/thunks";
 
@@ -89,7 +89,7 @@ export const RegisterPage = () => {
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      dispatch(startRegisterUserWithEmailPassword(formValues));
+      dispatch(startRegisterWithEmailPassword(formValues));
     }
   };
 

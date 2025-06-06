@@ -1,7 +1,7 @@
 import { registerUserWithEmailPassword } from "../../../services/firebase/firebaseProvider";
 import { setLogin, setLogout, setCheckingCredentials } from "../authSlice";
 
-export const startRegisterUserWithEmailPassword = ({
+export const startRegisterWithEmailPassword = ({
   displayName,
   email,
   password,
