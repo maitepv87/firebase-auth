@@ -1,4 +1,4 @@
-import { logoutFirebase } from "../../../services/firebase/firebaseProvider";
+import { logoutFirebase } from "../../../../services/firebase/firebaseProvider";
 import { setLogout } from "../authSlice";
 
 export const startLogout = () => {

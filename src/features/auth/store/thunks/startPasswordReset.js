@@ -1,4 +1,4 @@
-import { sendPasswordReset } from "../../../services/firebase/firebaseProvider";
+import { sendPasswordReset } from "../../../../services/firebase/firebaseProvider";
 import { setLogout } from "../authSlice";
 
 export const startPasswordReset = ({ email }) => {

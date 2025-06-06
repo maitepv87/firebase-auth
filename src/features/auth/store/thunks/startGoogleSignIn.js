@@ -1,4 +1,4 @@
-import { loginWithGoogle } from "../../../services/firebase/firebaseProvider";
+import { loginWithGoogle } from "../../../../services/firebase/firebaseProvider";
 import { setLogin, setLogout, setCheckingCredentials } from "../authSlice";
 
 export const startGoogleSignIn = () => {

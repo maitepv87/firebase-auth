@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import { AuthLayout } from "../components";
-import { startPasswordReset } from "../../../store/auth/thunks";
+import { startPasswordReset } from "../store/thunks";
 
 export const ForgotPassword = () => {
   const { errorMessage, status } = useSelector((state) => state.auth);

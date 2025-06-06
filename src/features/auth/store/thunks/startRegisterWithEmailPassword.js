@@ -1,4 +1,4 @@
-import { registerUserWithEmailPassword } from "../../../services/firebase/firebaseProvider";
+import { registerUserWithEmailPassword } from "../../../../services/firebase/firebaseProvider";
 import { setLogin, setLogout, setCheckingCredentials } from "../authSlice";
 
 export const startRegisterWithEmailPassword = ({

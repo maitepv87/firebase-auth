@@ -17,7 +17,7 @@ import { AuthLayout } from "../components";
 import {
   startGoogleSignIn,
   startLoginWithEmailPassword,
-} from "../../../store/auth/thunks";
+} from "../store/thunks";
 
 export const LoginPage = () => {
   const { errorMessage, status } = useSelector((state) => state.auth);
