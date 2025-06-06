@@ -15,7 +15,7 @@ export const AuthLayout = ({ children, title = "Auth", Icon }) => {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          {Icon ? <Icon /> : null}
+          {Icon && <Icon />}
         </Avatar>
 
         <Typography component="h1" variant="h5">
