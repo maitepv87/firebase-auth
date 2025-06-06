@@ -1,1 +1,1 @@
-export * from "./appLoader/AppLoader";
+export * from "./AppLoader";

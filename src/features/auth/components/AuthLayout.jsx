@@ -1,4 +1,3 @@
-import React from "react";
 import { Avatar, Box, Container, Paper, Typography } from "@mui/material";
 
 export const AuthLayout = ({ children, title = "Auth", Icon }) => {

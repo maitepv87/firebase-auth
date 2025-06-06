@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuth } from "../services/firebase/firebaseConfig";
-import { checkingCredentials, login, logout } from "../store/auth";
+import {
+  setLogin,
+  setLogout,
+  setCheckingCredentials,
+} from "../store/auth/authSlice";
 
 export const useCheckAuth = () => {
   const { status } = useSelector((state) => state.auth);
@@ -10,14 +14,14 @@ export const useCheckAuth = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(checkingCredentials());
+    dispatch(setCheckingCredentials());
 
     const unsubscribe = onAuthStateChanged(FirebaseAuth, async (user) => {
       if (!user) {
-        dispatch(logout());
+        dispatch(setLogout());
       } else {
         const { uid, email, displayName, photoURL } = user;
-        dispatch(login({ uid, email, displayName, photoURL }));
+        dispatch(setLogin({ uid, email, displayName, photoURL }));
       }
 
       setInitialCheckDone(true);
