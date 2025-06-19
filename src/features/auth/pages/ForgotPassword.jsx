@@ -10,6 +10,8 @@ export const ForgotPassword = () => {
   const { errorMessage, status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  useAuthCleanup();
+
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");

@@ -32,11 +32,14 @@ export const authSlice = createSlice({
     setCheckingCredentials: (state) => {
       state.status = "checking";
     },
+    clearAuthMessage: (state) => {
+      state.errorMessage = null;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setLogin, setLogout, setCheckingCredentials } =
+export const { setLogin, setLogout, setCheckingCredentials, clearAuthMessage } =
   authSlice.actions;
 
 export default authSlice.reducer;

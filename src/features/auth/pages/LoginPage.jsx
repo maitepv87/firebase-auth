@@ -9,10 +9,13 @@ import {
   startGoogleSignIn,
   startLoginWithEmailPassword,
 } from "../store/thunks";
+import { useAuthCleanup } from "../hooks";
 
 export const LoginPage = () => {
   const { errorMessage, status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  useAuthCleanup();
 
   const [formValues, setFormValues] = useState({
     email: "",

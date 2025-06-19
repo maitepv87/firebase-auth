@@ -9,10 +9,13 @@ import {
   startRegisterWithEmailPassword,
   startGoogleSignIn,
 } from "../store/thunks";
+import { useAuthCleanup } from "../hooks";
 
 export const RegisterPage = () => {
   const { errorMessage, status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  useAuthCleanup();
 
   const [formValues, setFormValues] = useState({
     displayName: "",
